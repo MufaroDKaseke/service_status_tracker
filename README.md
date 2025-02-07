@@ -1,6 +1,6 @@
-# Custom Service Status Tracker Demo
+# Custom Service Availability Tracker Demo
 
-This project is a custom service status tracker demo designed to monitor the availability and latency of various services such as SaaS, APIs, websites, or any other services. The demo utilizes Azure Application Insights (Monitor) to collect and track the status of a specified URL every 5 minutes. The collected data is then displayed using a React-based frontend, mimicking the style of the Discord Status page.
+This project is a custom service availability tracker demo designed to monitor the availability and latency of various services such as SaaS, APIs, websites, or any other services. The demo utilizes Azure Application Insights (Monitor) to collect and track the status of a specified URL every 5 minutes. The collected data is then displayed using a React-based frontend, mimicking the style of the Discord Status page.
 
 ## Features
 
