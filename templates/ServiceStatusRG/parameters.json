@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "components_service_status_url_monitor_name": {
+            "value": null
+        },
+        "workspaces_DefaultWorkspace_784a5e01_1929_4348_a1be_dcb7d7c143f5_JNB_externalid": {
+            "value": null
+        }
+    }
+}

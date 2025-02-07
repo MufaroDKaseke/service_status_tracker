@@ -13,19 +13,20 @@ This project is a custom service status tracker demo designed to monitor the ava
 
 - **Azure Application Insights**: For monitoring and collecting availability and latency data.
 - **React**: For building the frontend interface.
-- **JavaScript/TypeScript**: For implementing the frontend logic.
-- **HTML/CSS**: For structuring and styling the frontend interface.
+- **JavaScript**: For implementing the frontend logic.
+- **Bootstrap**: For structuring and styling the frontend interface.
 
 ## Setup and Installation
 
 1. **Clone the Repository**: Clone the project repository to your local machine.
   ```sh
-  git clone <repository-url>
+  git clone https://github.com/MufaroDKaseke/service_status_tracker.git
+  cd app/service_status_tracker
   ```
 
 2. **Install Dependencies**: Navigate to the project directory and install the necessary dependencies.
   ```sh
-  cd project-directory
+  cd service_status_tracker/app/service_status_tracker
   npm install
   ```
 
@@ -33,18 +34,14 @@ This project is a custom service status tracker demo designed to monitor the ava
 
 4. **Run the Application**: Start the React application to view the status tracker demo.
   ```sh
-  npm start
+  npm run dev
   ```
 
 ## Usage
 
 - **Monitoring Services**: The application will automatically monitor the specified URL every 5 minutes and collect availability and latency data.
-- **Viewing Status**: The React frontend will display the collected data, showing the current status and historical data of the monitored services.
+- **Viewing Status**: The React frontend will display the collected data, showing the current status and historical data of the monitored service.
 
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.

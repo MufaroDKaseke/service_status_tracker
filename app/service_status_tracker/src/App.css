@@ -1,42 +1,42 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+/* Category */
+.category {
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.category-title {
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.category-title small {
+  float: right;
 }
 
-.card {
-  padding: 2em;
+.category .category-day {
+  flex: 1;
+  height: 50px;
+  margin: 0 5px;
+  position: relative;
 }
 
-.read-the-docs {
-  color: #888;
+.category .category-day .category-day-tooltip {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 150%;
+  width: 200px;
+  background-color: white;
+}
+
+.category .category-day:hover {
+  cursor: pointer;
+}
+
+.category .category-day:hover .category-day-tooltip {
+  display: block;
+  z-index: 1;
 }
