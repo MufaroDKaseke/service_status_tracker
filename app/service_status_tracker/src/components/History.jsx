@@ -26,7 +26,7 @@ export default function History() {
               >
                 <div className="category-day-tooltip border p-2">
                   <h6>{item[0]}</h6>
-                  <p>{item[3]}</p>
+                  <p>{item[3]}ms</p>
                 </div>
               </div>
             ))}
