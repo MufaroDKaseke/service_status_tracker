@@ -21,12 +21,10 @@ This project is a custom service availability tracker demo designed to monitor t
 1. **Clone the Repository**: Clone the project repository to your local machine.
   ```sh
   git clone https://github.com/MufaroDKaseke/service_status_tracker.git
-  cd app/service_status_tracker
   ```
 
 2. **Install Dependencies**: Navigate to the project directory and install the necessary dependencies.
   ```sh
-  cd service_status_tracker/app/service_status_tracker
   npm install
   ```
 
