@@ -1,8 +1,8 @@
-export default async function getAzureData(token, workspaceId, timespan) {
+export default  async function getAzureData(token, workspaceId, query) {
     const url = `https://api.loganalytics.azure.com/v1/workspaces/${workspaceId}/query`;
     
     const requestBody = {
-        query: `AppAvailabilityResults | where TimeGenerated > ago(${timespan}) | project TimeGenerated, Success, DurationMs | extend Date = format_datetime(TimeGenerated, "yyyy-MM-dd") | summarize Success = min(toint(Success)), AvgDurationMs = avg(DurationMs), MinDurationMs = min(DurationMs), MaxDurationMs = max(DurationMs) by Date | order by Date asc`,
+        query: `${query}`,
         // timespan: "PT31D"
     };
     

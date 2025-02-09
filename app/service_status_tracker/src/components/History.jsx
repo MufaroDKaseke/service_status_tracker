@@ -2,11 +2,27 @@ import React, { useEffect, useState } from 'react';
 
 export default function History() {
   const [data, setData] = useState(null);
+  const [additionalData, setAdditionalData] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/data/31d')
+    fetch('http://localhost:3000/api/data/all/31d')
       .then(response => response.json())
-      .then(data => setData(data))
+      .then(data => {
+        setData(data);
+        data.forEach(item => {
+          if (item[1] === 0) {
+            fetch(`http://localhost:3000/api/data/${item[0]}`)
+              .then(response => response.json())
+              .then(additionalData => {
+                setAdditionalData(prevState => ({
+                  ...prevState,
+                  [item[0]]: additionalData
+                }));
+              })
+              .catch(error => console.error('Error fetching additional data:', error));
+          }
+        });
+      })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
@@ -27,15 +43,12 @@ export default function History() {
                 <div className="category-day-tooltip border p-2">
                   <h6>{item[0]}</h6>
                   <p>{item[3]}ms</p>
+                  {item[1] === 0 && additionalData[item[0]] && (
+                    <p>{JSON.stringify(additionalData[item[0]])}</p>
+                  )}
                 </div>
               </div>
             ))}
-            {/* <div key='' className='category-day bg-success'>
-                <div className="category-day-tooltip border p-2">
-                  <h6>6 February 2024</h6>
-                  <p>Operational</p>
-                </div>
-              </div> */}
           </div>
           <div className="d-flex align-items-center justify-content-between">
             <small className="lead fs-6">30days</small>
