@@ -15,7 +15,7 @@ function App() {
       <Header />
       <main className='container'>
         <div className="row justify-content-center">
-          <div className="col-lg-8">
+          <div className="col-lg-6">
             <CurrentStatus />
             <History />
           </div>

@@ -13,9 +13,15 @@ export default function CurrentStatus() {
   
   return (
     <section className="current py-3">
-      <div className={`alert ${data && data[2] === false ? 'alert-danger bg-danger' : 'alert-success bg-success'} text-white text-center fw-bold`} role="alert">
-        {data && data[2] === false ? 'Offline' : 'All Systems Operational'}
-      </div>
+        {data && data[2] === false ? (
+          <div className="alert alert-danger bg-danger text-white text-center fw-semibold" role="alert">
+            <i className="bi bi-x-circle fs-6 me-2"></i>Offline
+          </div>
+        ) : (
+          <div className="alert alert-success bg-success text-white fw-semibold d-flex align-items-center justify-content-center" role="alert">
+            <i className="bi bi-check-circle fs-6 me-2"></i><span>All Systems Operational</span>
+          </div>
+        )}
     </section>
   )
 }

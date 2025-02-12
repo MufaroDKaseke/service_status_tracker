@@ -5,7 +5,7 @@ export default function History() {
   const [additionalData, setAdditionalData] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/data/all/31d')
+    fetch('http://localhost:3000/api/data/all/30d')
       .then(response => response.json())
       .then(data => {
         setData(data);
@@ -28,11 +28,11 @@ export default function History() {
 
   return (
     <section className="history">
-      <p className="text-end small">{data ? JSON.stringify(data) : 'Loading...'}</p>
+      <p className="text-end text-secondary">{data ? `History for last ${data.length} days` : 'Loading...'}</p>
       <ul className="list-group text-start">
         <li className="category list-group-item">
           <div className="d-flex justify-content-between">
-            <h6 className="category-title">Title</h6><small className="lead text-success fs-6">Operational</small>
+            <h6 className="category-title">Title</h6><small className={`lead text-${data && data[data.length - 1][1] === 1 ? 'success' : 'danger'} fs-6`}>{data && data[data.length - 1][1] === 1 ? 'Operational' : 'Offline'}</small>
           </div>
           <div className="d-flex"> 
             {data && data.map((item, index) => (
@@ -40,8 +40,8 @@ export default function History() {
                 key={index}
                 className={`category-day ${item[1] === 1 ? 'bg-success' : 'bg-danger'}`}
               >
-                <div className="category-day-tooltip border p-2">
-                  <h6>{item[0]}</h6>
+                <div className={`category-day-tooltip border ${item[1] === 1 ? 'border-success' : 'border-danger'} rounded p-2`}>
+                  <strong>{item[0]}</strong>
                   <p>{item[3]}ms</p>
                   {item[1] === 0 && additionalData[item[0]] && (
                     <p>{JSON.stringify(additionalData[item[0]])}</p>
@@ -51,11 +51,11 @@ export default function History() {
             ))}
           </div>
           <div className="d-flex align-items-center justify-content-between">
-            <small className="lead fs-6">30days</small>
-            <hr className="w-100 bg-dark mx-3"></hr>
-            <small className="lead fs-6">15days</small>
-            <hr className="w-100 bg-dark mx-3"></hr>
-            <small className="lead fs-6">Today</small>
+            <small className="text-muted fs-6">30days</small>
+            <hr className="w-100 border-black mx-3"></hr>
+            <small className="text-muted fs-6">15days</small>
+            <hr className="w-100 border-black mx-3"></hr>
+            <small className="text-muted fs-6">Today</small>
           </div>
         </li>
       </ul>

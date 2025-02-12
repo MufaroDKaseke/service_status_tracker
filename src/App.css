@@ -25,15 +25,28 @@
 .category .category-day .category-day-tooltip {
   display: none;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
   min-height: 150%;
   width: 200px;
   background-color: white;
 }
 
 .category .category-day:hover {
+  background: purple;
   cursor: pointer;
+}
+
+.category .category-day:hover::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent green transparent;
 }
 
 .category .category-day:hover .category-day-tooltip {

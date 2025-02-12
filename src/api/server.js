@@ -7,9 +7,25 @@ import cors from 'cors';
 const app = express();
 const port = 3000;
 
-const tokenResponse = await getAzureToken(process.env.TENANT_ID, process.env.CLIENT_ID, process.env.CLIENT_SECRET);
-const token = tokenResponse.access_token;
+let token;
 
+const fetchToken = async () => {
+  try {
+    const tokenResponse = await getAzureToken(process.env.TENANT_ID, process.env.CLIENT_ID, process.env.CLIENT_SECRET);
+    token = tokenResponse.access_token;
+    console.log('Token refreshed');
+  } catch (error) {
+    console.error('Failed to fetch token', error);
+  }
+};
+
+// Initial token fetch
+fetchToken();
+
+// Refresh token every 50 minutes
+setInterval(fetchToken, 3000000);
+
+// Fix CORS error
 app.use(cors());
 
 // Get All Days Data
