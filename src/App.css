@@ -22,7 +22,7 @@
   position: relative;
 }
 
-.category .category-day .category-day-tooltip {
+.category .category-day .category-tooltip {
   display: none;
   position: absolute;
   top: 55px;
@@ -49,7 +49,7 @@
   border-color: transparent transparent green transparent;
 }
 
-.category .category-day:hover .category-day-tooltip {
+.category .category-day:hover .category-tooltip {
   display: block;
   z-index: 1;
 }

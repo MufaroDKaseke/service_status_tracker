@@ -55,9 +55,9 @@ app.get('/api/data/latest', async (req, res) => {
 // Get Specific Date's data
 app.get('/api/data/:date', async (req, res) => {
   try {
-    let query = `AppAvailabilityResults | extend Date = format_datetime(TimeGenerated, "yyyy-MM-dd"), Time = format_datetime(TimeGenerated, "HH:mm:ss") | where Date == "${req.params.date}" | project Date, Time, Success, DurationMs  | order by Time asc`;
+    let query = `AppAvailabilityResults | extend Date = format_datetime(TimeGenerated, "yyyy-MM-dd"), Time = format_datetime(TimeGenerated, "HH:mm:ss") | where Date == "${req.params.date}" | project Date, Time, Success, DurationMs  | order by Time asc | top 1 by Time asc`;
     const data = await getAzureData(token, process.env.WORKSPACE_ID, query);
-    res.json(data.tables[0].rows);
+    res.json(data.tables[0].rows[0]);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch data' });

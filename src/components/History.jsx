@@ -26,13 +26,21 @@ export default function History() {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  // Convert the time to a local time zone
+  const convertUTCToLocalTime = (utcTimeString) => {
+    const now = new Date();
+    const [hours, minutes] = utcTimeString.split(":").map(Number);
+    const utcDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), hours, minutes));
+    return utcDate.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
+  };
+
   return (
     <section className="history">
       <p className="text-end text-secondary">{data ? `History for last ${data.length} days` : 'Loading...'}</p>
       <ul className="list-group text-start">
         <li className="category list-group-item">
           <div className="d-flex justify-content-between">
-            <h6 className="category-title">Title</h6><small className={`lead text-${data && data[data.length - 1][1] === 1 ? 'success' : 'danger'} fs-6`}>{data && data[data.length - 1][1] === 1 ? 'Operational' : 'Offline'}</small>
+            <h6 className="category-title">Website</h6><small className={`lead text-${data && data[data.length - 1][1] === 1 ? 'success' : 'danger'} fs-6`}>{data && data[data.length - 1][1] === 1 ? 'Operational' : 'Offline'}</small>
           </div>
           <div className="d-flex"> 
             {data && data.map((item, index) => (
@@ -40,11 +48,15 @@ export default function History() {
                 key={index}
                 className={`category-day ${item[1] === 1 ? 'bg-success' : 'bg-danger'}`}
               >
-                <div className={`category-day-tooltip border ${item[1] === 1 ? 'border-success' : 'border-danger'} rounded p-2`}>
-                  <strong>{item[0]}</strong>
-                  <p>{item[3]}ms</p>
-                  {item[1] === 0 && additionalData[item[0]] && (
-                    <p>{JSON.stringify(additionalData[item[0]])}</p>
+                <div className={`category-tooltip border ${item[1] === 1 ? 'border-success' : 'border-danger'} rounded p-2`}>
+                  <strong className='category-tooltip-date'>{item[0]}</strong>
+                  <p className='category-tooltip-latency'>{item[3]}ms</p>
+                  {item[1] === 0 && additionalData[item[0]] ? (
+                    <p className='bg-secondary py-1 px-2 rounded'><i className="bi bi-exclamation-triangle text-warning me-2"></i>
+                    {convertUTCToLocalTime(additionalData[item[0]][1])}
+                    </p>
+                  ) : (
+                    <p>No issues detected</p>
                   )}
                 </div>
               </div>
