@@ -4,8 +4,12 @@ export default function History() {
   const [data, setData] = useState(null);
   const [additionalData, setAdditionalData] = useState({});
 
+  const getLocaleTimezone = () => {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+  }
+
   useEffect(() => {
-    fetch('http://localhost:3000/api/data/all/30d')
+    fetch(`http://localhost:3000/api/data/all/30d?timezone=${getLocaleTimezone()}`)
       .then(response => response.json())
       .then(data => {
         setData(data);
@@ -26,14 +30,6 @@ export default function History() {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  // Convert the time to a local time zone
-  const convertUTCToLocalTime = (utcTimeString) => {
-    const now = new Date();
-    const [hours, minutes] = utcTimeString.split(":").map(Number);
-    const utcDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), hours, minutes));
-    return utcDate.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
-  };
-
   return (
     <section className="history">
       <p className="text-end text-secondary">{data ? `History for last ${data.length} days` : 'Loading...'}</p>
@@ -53,7 +49,7 @@ export default function History() {
                   <p className='category-tooltip-latency'>{item[3]}ms</p>
                   {item[1] === 0 && additionalData[item[0]] ? (
                     <p className='bg-secondary py-1 px-2 rounded'><i className="bi bi-exclamation-triangle text-warning me-2"></i>
-                    {convertUTCToLocalTime(additionalData[item[0]][1])}
+                    {additionalData[item[0]][1]}
                     </p>
                   ) : (
                     <p>No issues detected</p>
